@@ -1,0 +1,56 @@
+#!/bin/bash
+
+set -eux
+
+apt-get update
+(
+  cd /tmp
+  apt-get source libxml2 -y
+)
+
+(
+  cd /tmp/libxml2_2.9.3+dfsg1
+
+  ./configure \
+    --without-c14n \
+    --without-catalog \
+    --without-debug \
+    --without-docbook \
+    --without-fexceptions \
+    --without-ftp \
+    --without-history \
+    --without-html \
+    --without-http \
+    --without-iconv \
+    --without-icu \
+    --without-iso8859x \
+    --without-legacy \
+    --without-mem-debug \
+    --without-minimum \
+    --without-output \
+    --without-pattern \
+    --without-push \
+    --without-python \
+    --without-reader \
+    --without-readline \
+    --without-regexps \
+    --without-run-debug \
+    --without-sax1 \
+    --without-schemas \
+    --without-schematron \
+    --without-threads \
+    --without-thread-alloc \
+    --without-tree \
+    --without-valid \
+    --without-xinclude \
+    --without-xptr \
+    --without-modules \
+    --without-coverage \
+    --without-lzma \
+    --disable-shared \
+    --enable-static
+
+  make
+  make install
+)
+cp -p /usr/local/lib/libxml2.a .
